@@ -1,0 +1,45 @@
+﻿@model Employee_EFDFA.Models.Employee
+
+@{
+    ViewBag.Title = "Edit Employee";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-white py-2 mb-4" style="background-color: yellowgreen;">Edit Employee</h2>
+
+    @using (Html.BeginForm("UpdateEmployee", "Emp", FormMethod.Post))
+
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(e => e.Eid)
+
+        <div class="mb-3">
+            @Html.LabelFor(e => e.Ename, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(e => e.Ename, new { @class = "form-control", placeholder = "Enter employee name" })
+            @Html.ValidationMessageFor(e => e.Ename, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(e => e.Job, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(e => e.Job, new { @class = "form-control", placeholder = "Enter job title" })
+            @Html.ValidationMessageFor(e => e.Job, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(e => e.Salary, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(e => e.Salary, new { @class = "form-control", placeholder = "Enter salary" })
+            @Html.ValidationMessageFor(e => e.Salary, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.Label("Department", htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownList("Did", (SelectList)ViewBag.Departments, new { @class = "form-select" })
+            @Html.ValidationMessage("Did", "", new { @class = "text-danger" })
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <input type="submit" value="Update" class="btn btn-warning" />
+            @Html.ActionLink("Cancel", "DisplayEmployees", null, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</div>
