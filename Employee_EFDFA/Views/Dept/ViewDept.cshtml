@@ -1,0 +1,27 @@
+﻿@model Employee_EFDFA.Models.Department
+
+@{
+    ViewBag.Title = "Department Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3 class="mb-0">Department Details</h3>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9">@Model.Did</dd>
+
+                <dt class="col-sm-3">Department Name</dt>
+                <dd class="col-sm-9">@Model.Dname</dd>
+
+                <dt class="col-sm-3">Location</dt>
+                <dd class="col-sm-9">@Model.Location</dd>
+            </dl>
+
+            <a href="@Url.Action("DisplayDept", "Dept")" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model Employee_EFDFA.Models.Department
+
+@{
+    ViewBag.Title = "Add New Department";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h3>Add New Department</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.Dname, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Dname, new { @class = "form-control", placeholder = "Enter Department Name" })
+                        @Html.ValidationMessageFor(m => m.Dname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.Location, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Location, new { @class = "form-control", placeholder = "Enter Location" })
+                        @Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Add Department</button>
+                <a href="@Url.Action("DisplayDept", "Dept")" class="btn btn-secondary ml-2">Back to Department List</a>
+            }
+        </div>
+    </div>
+</div>

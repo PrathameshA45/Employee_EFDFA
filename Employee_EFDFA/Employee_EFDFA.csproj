@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DeptController.cs" />
     <Compile Include="Controllers\EmpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -230,6 +231,11 @@
     <Content Include="Views\Emp\AddEmployee.cshtml" />
     <Content Include="Views\Emp\EditEmployee.cshtml" />
     <Content Include="Views\Emp\DeleteEmployee.cshtml" />
+    <Content Include="Views\Dept\DisplayDept.cshtml" />
+    <Content Include="Views\Dept\EditDept.cshtml" />
+    <Content Include="Views\Dept\ViewDept.cshtml" />
+    <Content Include="Views\Dept\DeleteDept.cshtml" />
+    <Content Include="Views\Dept\AddDept.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,48 @@
+﻿@model Employee_EFDFA.Models.Department
+
+@{
+    ViewBag.Title = "Edit Department";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h2 class="mb-0">Edit Department</h2>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Did)
+
+                <div class="form-group row mb-3">
+                    @Html.Label("Dname", "Department Name", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Dname, new { @class = "form-control", placeholder = "Enter Department Name" })
+                        @Html.ValidationMessageFor(m => m.Dname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(m => m.Location, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Location, new { @class = "form-control", placeholder = "Enter Location" })
+                        @Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row mt-4">
+                    <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="@Url.Action("DisplayDept", "Dept")" class="btn btn-secondary ms-2">Cancel</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
