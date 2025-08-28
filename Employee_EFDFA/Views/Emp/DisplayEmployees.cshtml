@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Employee_EFDFA.Models.Employee>
+
+@{
+    ViewBag.Title = "Employee Directory";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-white py-2 mb-4" style="background-color: yellowgreen;">Employee Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead class="table-success text-center">
+                <tr>
+                    <th>@Html.DisplayNameFor(e => e.Eid)</th>
+                    <th>@Html.DisplayNameFor(e => e.Ename)</th>
+                    <th>@Html.DisplayNameFor(e => e.Job)</th>
+                    <th>@Html.DisplayNameFor(e => e.Salary)</th>
+                    <th>@Html.DisplayNameFor(e => e.Status)</th>
+                    <th>@Html.DisplayNameFor(e => e.Did)</th>
+                    <th>@Html.DisplayNameFor(e => e.Department.Dname)</th>
+                    <th>@Html.DisplayNameFor(e => e.Department.Location)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td>@employee.Eid</td>
+                        <td>@employee.Ename</td>
+                        <td>@employee.Job</td>
+                        <td>@Html.DisplayFor(E => employee.Salary)</td>
+                        <td>@Html.DisplayFor(E => employee.Status)</td>
+                        <td>@employee.Did</td>
+                        <td>@(employee.Department?.Dname ?? "N/A")</td>
+                        <td>@(employee.Department?.Location ?? "N/A")</td>
+                        <td class="text-center">
+                            <div class="btn-group" role="group">
+                                @Html.ActionLink("View", "DisplayEmployee", new { Eid = employee.Eid }, new { @class = "btn btn-info btn-sm" })
+                                @Html.ActionLink("Edit", "EditEmployee", new { Eid = employee.Eid }, new { @class = "btn btn-warning btn-sm" })
+                                @Html.ActionLink("Delete", "DeleteEmployee", new { Eid = employee.Eid }, new { @class = "btn btn-danger btn-sm" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-3">
+        @Html.ActionLink("Add New Employee", "AddEmployee", null, new { @class = "btn btn-success" })
+    </div>
+</div>
