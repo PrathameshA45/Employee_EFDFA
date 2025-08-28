@@ -1,0 +1,25 @@
+﻿@model Employee_EFDFA.Models.Department
+
+@{
+    ViewBag.Title = "Confirm Deletion";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h3>Confirm Deletion</h3>
+        </div>
+        <div class="card-body">
+            <p>Are you sure you want to delete the department <strong>@Model.Dname</strong>?</p>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Did)
+
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="@Url.Action("DisplayDept", "Dept")" class="btn btn-secondary ms-2">Cancel</a>
+            }
+        </div>
+    </div>
+</div>

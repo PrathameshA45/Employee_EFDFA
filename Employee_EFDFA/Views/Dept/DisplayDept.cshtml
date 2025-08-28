@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Employee_EFDFA.Models.Department>
+
+@{
+    ViewBag.Title = "All Departments";
+}
+<div class="container mt-4">
+    <h2 class="text-center text-white py-2 mb-4" style="background-color: yellowgreen;">All Departments</h2>
+
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dept in Model)
+            {
+                <tr>
+                    <td>@dept.Did</td>
+                    <td>@dept.Dname</td>
+                    <td>@dept.Location</td>
+                    <td>
+                        @Html.ActionLink("View", "ViewDept", "Dept", new { Did = dept.Did }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("Edit", "EditDept", new { Did = dept.Did }, new { @class = "btn btn-warning btn-sm" })
+                        @Html.ActionLink("Delete", "DeleteDept", new { Did = dept.Did }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <div class="text-center mt-3">
+        @Html.ActionLink("Add New Department", "AddDept", null, new { @class = "btn btn-success" })
+    </div>
+</div>
