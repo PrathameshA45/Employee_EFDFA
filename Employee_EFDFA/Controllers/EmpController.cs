@@ -12,11 +12,22 @@
         public class EmpController : Controller
         {
           MVCDBEntities dc = new MVCDBEntities();
-            public ViewResult DisplayEmployees()
+            public ViewResult DisplayEmployees(string search)
             {
-                var Emps = dc.Employees.Where(E => E.Status == true);
-                return View(Emps);
+
+            var Emps = dc.Employees.Where(e => e.Status == true);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                string lowerSearch = search.ToLower();
+
+                Emps = Emps.Where(e =>
+                    e.Ename.ToLower().Contains(lowerSearch) ||
+                    e.Department.Location.ToLower().Contains(lowerSearch)
+                );
             }
+            return View(Emps.ToList());
+        }
             public ViewResult DisplayEmployee(int Eid)
             {
                 var Emp = dc.Employees.Find(Eid);
