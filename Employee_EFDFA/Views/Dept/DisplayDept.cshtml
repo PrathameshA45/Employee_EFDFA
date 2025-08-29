@@ -4,14 +4,28 @@
     ViewBag.Title = "All Departments";
 }
 <div class="container mt-4">
-    <h2 class="text-center text-white py-2 mb-4" style="background-color: yellowgreen;">All Departments</h2>
+    <h2 class="text-center text-white py-2 mb-4" style="background-color: yellowgreen;">Department Details</h2>
 
-
+    @using (Html.BeginForm("DisplayDept", "Dept", FormMethod.Get))
+    {
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search by name or location" value="@Request.QueryString["search"]" />
+                    <div class="input-group-append">
+                        <!-- Add more space by adjusting ml-4 (margin-left) -->
+                        <button type="submit" class="btn btn-primary ml-2">Search</button>
+                        <a href="@Url.Action("DisplayDept", "Dept")" class="btn btn-secondary ml-2">Clear</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Department Name</th>
                 <th>Location</th>
                 <th>Actions</th>
             </tr>
@@ -30,7 +44,6 @@
                     </td>
                 </tr>
             }
-
         </tbody>
     </table>
     <div class="text-center mt-3">

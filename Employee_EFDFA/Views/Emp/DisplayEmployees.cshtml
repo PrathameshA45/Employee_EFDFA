@@ -6,6 +6,21 @@
 
 <div class="container mt-4">
     <h2 class="text-center text-white py-2 mb-4" style="background-color: yellowgreen;">Employee Details</h2>
+    @using (Html.BeginForm("DisplayEmployees", "Emp", FormMethod.Get))
+    {
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search by name or location" value="@Request.QueryString["search"]" />
+                    <div class="input-group-append">
+                        <!-- Add more space by adjusting ml-4 (margin-left) -->
+                        <button type="submit" class="btn btn-primary ml-2">Search</button>
+                        <a href="@Url.Action("DisplayEmployees", "Emp")" class="btn btn-secondary ml-2">Clear</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover align-middle">

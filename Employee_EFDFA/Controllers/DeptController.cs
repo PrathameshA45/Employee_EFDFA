@@ -14,12 +14,21 @@ namespace Employee_EFDFA.Controllers
     {
         MVCDBEntities dc = new MVCDBEntities();
 
-        public ViewResult DisplayDept()
+        public ActionResult DisplayDept(string search)
         {
-            var department = dc.Departments.ToList();
-            return View(department);
-        }
+            var departments = from d in dc.Departments
+                              select d;
 
+            if (!string.IsNullOrEmpty(search))
+            {
+                departments = departments.Where(d =>
+                d.Dname.ToLower().Contains(search.ToLower()) ||
+                d.Location.ToLower().Contains(search.ToLower()));
+
+            }
+
+            return View(departments.ToList());
+        }
         public ViewResult ViewDept(int Did)
         {
             var Dept = dc.Departments.Find(Did);
