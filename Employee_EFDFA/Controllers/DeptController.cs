@@ -66,7 +66,7 @@ namespace Employee_EFDFA.Controllers
             var dept = dc.Departments.Find(Did);
             return View(dept); 
         }
-        
+        //DeleteDept Dept
         public RedirectToRouteResult DeleteDept (Department Dept)
         {
             var dept = dc.Departments.Find(Dept.Did);
