@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Employee_EFDFA.Models.Employee>
+
+<table class="table table-bordered table-striped table-hover align-middle">
+    <thead class="table-success text-center">
+        <tr>
+            <th>EID</th>
+            <th>Name</th>
+            <th>Job</th>
+            <th>Salary</th>
+            <th>Status</th>
+            <th>Dept ID</th>
+            <th>Department</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Eid</td>
+                <td>@employee.Ename</td>
+                <td>@employee.Job</td>
+                <td>@employee.Salary</td>
+                <td>@employee.Status</td>
+                <td>@employee.Did</td>
+                <td>@(employee.Department?.Dname ?? "N/A")</td>
+                <td>@(employee.Department?.Location ?? "N/A")</td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        @Html.ActionLink("View", "DisplayEmployee",
+                            new { Eid = employee.Eid },
+                            new { @class = "btn btn-info btn-sm" })
+
+                        @Html.ActionLink("Edit", "EditEmployee",
+                            new { Eid = employee.Eid },
+                            new { @class = "btn btn-warning btn-sm" })
+
+                        @Html.ActionLink("Delete", "DeleteEmployee",
+                            new { Eid = employee.Eid },
+                            new { @class = "btn btn-danger btn-sm" })
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -236,6 +236,7 @@
     <Content Include="Views\Dept\ViewDept.cshtml" />
     <Content Include="Views\Dept\DeleteDept.cshtml" />
     <Content Include="Views\Dept\AddDept.cshtml" />
+    <Content Include="Views\Emp\_EmployeeTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

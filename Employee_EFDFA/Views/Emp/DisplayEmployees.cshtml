@@ -5,64 +5,55 @@
 }
 
 <div class="container mt-4">
-    <h2 class="text-center text-white py-2 mb-4" style="background-color: yellowgreen;">Employee Details</h2>
-    @using (Html.BeginForm("DisplayEmployees", "Emp", FormMethod.Get))
-    {
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search by name or location" value="@Request.QueryString["search"]" />
-                    <div class="input-group-append">
-                        <!-- Add more space by adjusting ml-4 (margin-left) -->
-                        <button type="submit" class="btn btn-primary ml-2">Search</button>
-                        <a href="@Url.Action("DisplayEmployees", "Emp")" class="btn btn-secondary ml-2">Clear</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover align-middle">
-            <thead class="table-success text-center">
-                <tr>
-                    <th>@Html.DisplayNameFor(e => e.Eid)</th>
-                    <th>@Html.DisplayNameFor(e => e.Ename)</th>
-                    <th>@Html.DisplayNameFor(e => e.Job)</th>
-                    <th>@Html.DisplayNameFor(e => e.Salary)</th>
-                    <th>@Html.DisplayNameFor(e => e.Status)</th>
-                    <th>@Html.DisplayNameFor(e => e.Did)</th>
-                    <th>@Html.DisplayNameFor(e => e.Department.Dname)</th>
-                    <th>@Html.DisplayNameFor(e => e.Department.Location)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var employee in Model)
-                {
-                    <tr>
-                        <td>@employee.Eid</td>
-                        <td>@employee.Ename</td>
-                        <td>@employee.Job</td>
-                        <td>@Html.DisplayFor(E => employee.Salary)</td>
-                        <td>@Html.DisplayFor(E => employee.Status)</td>
-                        <td>@employee.Did</td>
-                        <td>@(employee.Department?.Dname ?? "N/A")</td>
-                        <td>@(employee.Department?.Location ?? "N/A")</td>
-                        <td class="text-center">
-                            <div class="btn-group" role="group">
-                                @Html.ActionLink("View", "DisplayEmployee", new { Eid = employee.Eid }, new { @class = "btn btn-info btn-sm" })
-                                @Html.ActionLink("Edit", "EditEmployee", new { Eid = employee.Eid }, new { @class = "btn btn-warning btn-sm" })
-                                @Html.ActionLink("Delete", "DeleteEmployee", new { Eid = employee.Eid }, new { @class = "btn btn-danger btn-sm" })
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <h2 class="text-center text-white py-2 mb-4" style="background-color: yellowgreen;">
+        Employee Details
+    </h2>
+
+    <!-- SEARCH BOX -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <input type="text"
+                   id="searchBox"
+                   class="form-control"
+                   placeholder="Search by name or location..." />
+        </div>
+    </div>
+
+    <!-- TABLE LOAD AREA -->
+    <div id="employeeTable" class="table-responsive">
+        @Html.Partial("_EmployeeTable", Model)
     </div>
 
     <div class="text-center mt-3">
-        @Html.ActionLink("Add New Employee", "AddEmployee", null, new { @class = "btn btn-success" })
+        @Html.ActionLink("Add New Employee", "AddEmployee", null,
+            new { @class = "btn btn-success" })
     </div>
 </div>
+
+<!-- JQUERY + AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        let timer;
+
+        $("#searchBox").on("keyup", function () {
+
+            clearTimeout(timer);
+            let value = $(this).val();
+
+            timer = setTimeout(function () {
+                $.ajax({
+                    url: '@Url.Action("SearchEmployees", "Emp")',
+                    type: 'GET',
+                    data: { search: value },
+                    success: function (data) {
+                        $("#employeeTable").html(data);
+                    }
+                });
+            }, 300); // debounce
+        });
+    });
+</script>
